@@ -17,6 +17,7 @@ limitations under the License.
 package v1
 
 // JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).
+//+kubebuilder:object:generate=false
 type JSONSchemaProps struct {
 	ID          string        `json:"id,omitempty" protobuf:"bytes,1,opt,name=id"`
 	Schema      JSONSchemaURL `json:"$schema,omitempty" protobuf:"bytes,2,opt,name=schema"`
@@ -165,6 +166,7 @@ type JSONSchemaProps struct {
 
 // JSON represents any valid JSON value.
 // These types are supported: bool, int64, float64, string, []interface{}, map[string]interface{} and nil.
+//+kubebuilder:object:generate=false
 type JSON struct {
 	Raw []byte `protobuf:"bytes,1,opt,name=raw"`
 }
@@ -187,6 +189,7 @@ type JSONSchemaURL string
 
 // JSONSchemaPropsOrArray represents a value that can either be a JSONSchemaProps
 // or an array of JSONSchemaProps. Mainly here for serialization purposes.
+//+kubebuilder:object:generate=false
 type JSONSchemaPropsOrArray struct {
 	Schema      *JSONSchemaProps  `protobuf:"bytes,1,opt,name=schema"`
 	JSONSchemas []JSONSchemaProps `protobuf:"bytes,2,rep,name=jSONSchemas"`
@@ -207,6 +210,7 @@ func (_ JSONSchemaPropsOrArray) OpenAPISchemaFormat() string { return "" }
 
 // JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value.
 // Defaults to true for the boolean property.
+//+kubebuilder:object:generate=false
 type JSONSchemaPropsOrBool struct {
 	Allows bool             `protobuf:"varint,1,opt,name=allows"`
 	Schema *JSONSchemaProps `protobuf:"bytes,2,opt,name=schema"`
@@ -229,6 +233,7 @@ func (_ JSONSchemaPropsOrBool) OpenAPISchemaFormat() string { return "" }
 type JSONSchemaDependencies map[string]JSONSchemaPropsOrStringArray
 
 // JSONSchemaPropsOrStringArray represents a JSONSchemaProps or a string array.
+//+kubebuilder:object:generate=false
 type JSONSchemaPropsOrStringArray struct {
 	Schema   *JSONSchemaProps `protobuf:"bytes,1,opt,name=schema"`
 	Property []string         `protobuf:"bytes,2,rep,name=property"`
@@ -251,6 +256,7 @@ func (_ JSONSchemaPropsOrStringArray) OpenAPISchemaFormat() string { return "" }
 type JSONSchemaDefinitions map[string]JSONSchemaProps
 
 // ExternalDocumentation allows referencing an external resource for extended documentation.
+//+kubebuilder:object:generate=false
 type ExternalDocumentation struct {
 	Description string `json:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
 	URL         string `json:"url,omitempty" protobuf:"bytes,2,opt,name=url"`
